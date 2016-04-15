@@ -51,6 +51,20 @@ app.post('/api/blogs', function(req, res){
   });
 });
 
+app.delete('/api/blogs/:id', function(req, res){
+  console.log('received a delete request for _id: ' + req.params.id);
+  Blog.remove({_id: req.params.id}, function(err){
+    res.send({_id: req.params.id});
+  });
+});
+
+app.put('/api/blogs/:id', function(req, res){
+  console.log('received an update request for _id: ' + req.params.id);
+  Blog.update({_id: req.params.id}, req.body, function(err){
+    res.send({_id: req.params.id});
+  });
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port);
